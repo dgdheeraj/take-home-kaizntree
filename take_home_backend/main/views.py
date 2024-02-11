@@ -6,26 +6,21 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.http import JsonResponse
 import json
 
-from .models import Book
-from .serializers import BookSerializer
+from .models import Tag, Category, Inventory
+from .serializers import TagSerializer, CategorySerializer, InventorySerializer 
 
 User = get_user_model()
 
-
-class ListBooksAPI(generics.ListAPIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
+"""
+Authentication APIs
+"""
 
 class RegisterView(APIView):
-    
     def post(self, request):
         data = json.loads(request.body)
         username = data.get('username')
         password = data.get('password')
-        print("in register view")
-        print("HERE::",username, password)
+
         if username is None or password is None:
             return JsonResponse({'detail': 'Please provide username and password.'}, status=400)
 
@@ -33,16 +28,11 @@ class RegisterView(APIView):
             return JsonResponse({'detail': 'Username is already taken.'}, status=400)
 
         user = User.objects.create_user(username=username, password=password)
-        # login(request, user)
         return JsonResponse({'detail': 'User registered'})
 
 
 class LoginView(APIView):
-
     def post(self, request):
-        """
-        API To Login
-        """
         data = json.loads(request.body)
         username = data.get('username')
         password = data.get('password')
@@ -58,11 +48,9 @@ class LoginView(APIView):
         login(request, user)
         return JsonResponse({'detail': 'Successfully logged in.'})
 
+
 class LogoutView(APIView):
     def get(self, request):
-        """
-        API To logout
-        """
         if not request.user.is_authenticated:
             return JsonResponse({'detail': 'You\'re not logged in.'}, status=400)
 
@@ -86,3 +74,27 @@ class WhoAmIView(APIView):
     @staticmethod
     def get(request, format=None):
         return JsonResponse({'username': request.user.username})
+
+
+"""
+APIs for Inventory
+"""
+
+class TagsAPI(generics.ListAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
+
+class CategoryAPI(generics.ListAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class InventoryAPI(generics.ListAPIView):
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = Inventory.objects.all()
+    serializer_class = InventorySerializer
