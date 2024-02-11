@@ -1,8 +1,12 @@
 from django.urls import include, path
-from .views import CustomerCreate, CustomerList
+from . import views
 
 
 urlpatterns = [
-    path('create/', CustomerCreate.as_view(), name='create-customer'),
-    path('', CustomerList.as_view()),
+    path('books/', views.ListBooksAPI.as_view(), name='list-books'),
+    path('register/', views.RegisterView.as_view(), name='api-login'),
+    path('login/', views.LoginView.as_view(), name='api-login'),
+    path('logout/', views.LogoutView.as_view(), name='api-logout'),
+    path('session/', views.SessionView.as_view(), name='api-session'),
+    path('whoami/', views.WhoAmIView.as_view(), name='api-whoami'),
 ]
