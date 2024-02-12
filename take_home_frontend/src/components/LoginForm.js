@@ -1,13 +1,15 @@
 import { React, useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
+import LoginContext from '../contexts/LoginContext';
 import axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function LoginForm(){
     const [uname, setUname] = useState("");
-    const [password, setPassword] = useState("")
-    const [error, setError] = useState("")
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const { login, changeLogin } = useContext(LoginContext);
 
     const navigate = useNavigate();
 
@@ -19,7 +21,8 @@ function LoginForm(){
         .then(response => {
             console.log(response.data.detail);
             if (response.status === 200) {
-            navigate("/inventory");
+                changeLogin(true);
+                navigate("/inventory");
             } 
             else {
                 setError(response.data.detail);
@@ -47,6 +50,7 @@ function LoginForm(){
         </div>
         <div className={"form-group"}>
             <input
+                type="password"
                 value={password}
                 placeholder="Enter your password here"
                 onChange={ev => setPassword(ev.target.value)}

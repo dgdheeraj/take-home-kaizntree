@@ -1,13 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
 import LoginForm from './components/LoginForm';
 import RegisterForm from './components/RegisterForm';
 import InventoryView from './components/InventoryView';
-import {React} from 'react';
+import LoginContext from './contexts/LoginContext';
+import {React, useState } from 'react';
 import {BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
 
 function App() {
+  const [login, changeLogin] = useState(false);
   return (
+    <LoginContext.Provider value={{ login: login, changeLogin: changeLogin }}>
     <div className="center">
         <Router basename={'/'}>
           <Routes>
@@ -18,6 +20,7 @@ function App() {
           </Routes>
         </Router>
     </div>
+    </LoginContext.Provider>
   );
 }
 
