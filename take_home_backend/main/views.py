@@ -96,7 +96,7 @@ class TagsAPI(APIView):
             serializer.save()
             return JsonResponse({'detail': 'Created'}, status=201)
         
-        return JsonResponse({'detail': 'Error creating item'}, status=400)
+        return JsonResponse({'detail': 'Error creating item, already exists'}, status=400)
 
 
 class CategoryAPI(APIView):
@@ -115,7 +115,7 @@ class CategoryAPI(APIView):
             serializer.save()
             return JsonResponse({'detail': 'Created'}, status=201)
         
-        return JsonResponse({'detail': 'Error creating item'}, status=400)
+        return JsonResponse({'detail': 'Error creating item, already exists'}, status=400)
 
 
 class InventoryAPI(APIView):
@@ -212,4 +212,4 @@ class InventoryAPI(APIView):
             serializer.save()
             return JsonResponse({'detail': 'Created'}, status=201)
         
-        return JsonResponse({'detail': 'Error creating item'}, status=400)
+        return JsonResponse({'detail': 'Error creating item, already exists'}, status=400)
