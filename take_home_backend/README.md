@@ -1,3 +1,17 @@
+## Setting Up Development Environment
+
+1. Create a virtual environment and activate it
+```python3 -m venv ./venv```
+```source venv/bin/activate or ./venv/Scripts/activate```
+
+3. Install dependencies
+```pip3 install -r requirements.txt```
+```cd take_home_backend```
+
+4. Run the development server
+```python3 manage.py runserver```
+
+
 ## Testing
 
 Added unit tests for models and views with a 85% coverage
