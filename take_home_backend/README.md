@@ -1,3 +1,7 @@
+## Audio Delivarable
+
+[Link to audio recording regarding approach](https://github.com/dgdheeraj/take-home-kaizntree/blob/main/Delivarable%20-%20Approach.m4a) 
+
 ## Setting Up Development Environment
 
 1. Create a virtual environment and activate it
