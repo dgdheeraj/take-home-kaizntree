@@ -1,3 +1,14 @@
+## Testing
+
+Added unit tests for models and views with a 85% coverage
+```
+coverage run --source main ./manage.py test
+coverage report -m
+```
+<img width="713" alt="coverage_report" src="https://github.com/dgdheeraj/take-home-kaizntree/assets/45272841/ed24739c-0da4-4882-9ebb-40f84554ed67">
+
+
+
 ## API Documentation
 
 Used Django Session Authentication to authenticate all endpoints
